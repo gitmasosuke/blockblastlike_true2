@@ -1,0 +1,8 @@
+D:/UNITY/Blockblast_4/.utmp/RelWithDebInfo/1c40t5b4/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/UNITY/Blockblast_4/.utmp/RelWithDebInfo/1c40t5b4/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/UNITY/Blockblast_4/.utmp/RelWithDebInfo/1c40t5b4/arm64-v8a/GameActivity/CMakeFiles/game.dir
+D:/UNITY/Blockblast_4/.utmp/RelWithDebInfo/1c40t5b4/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+D:/UNITY/Blockblast_4/.utmp/RelWithDebInfo/1c40t5b4/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
+D:/UNITY/Blockblast_4/.utmp/RelWithDebInfo/1c40t5b4/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+D:/UNITY/Blockblast_4/.utmp/RelWithDebInfo/1c40t5b4/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+D:/UNITY/Blockblast_4/.utmp/RelWithDebInfo/1c40t5b4/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir

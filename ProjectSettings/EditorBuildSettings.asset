@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TitleScene.unity
+    guid: 787165df343220242908d897fd4d56f5
+  - enabled: 1
+    path: Assets/Scenes/HomeScene.unity
+    guid: 61c68b475132a78458779484219a7b42
+  - enabled: 1
+    path: Assets/Scenes/StageSelect.unity
+    guid: cee49e68b8d7b8543aaa2890718e6d11
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/AlbumDetailScene.unity
+    guid: 2010b7e0f18f5e74fb60adb7633f0e75
+  m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 3ac236aae4e7d79438166fe47b1c7400, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 75a2651496e09f24c854756d93d9c66b, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 4ed6c4882fe4b4140b40b489e4e872d9, type: 2}
+  m_UseUCBPForAssetBundles: 0

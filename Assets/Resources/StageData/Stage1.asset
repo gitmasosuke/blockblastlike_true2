@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecaa1663cff1524a88154cfa44e03d6, type: 3}
+  m_Name: Stage1
+  m_EditorClassIdentifier: 
+  stageID: 1
+  backgroundSprites:
+  - {fileID: 6771898881265339701, guid: 3434a081ad4e78d4c9204cef72825568, type: 3}
+  - {fileID: -8504764563255514714, guid: a59d309443967484e87b5636a253d586, type: 3}
+  unlockThresholds: 3200000064000000
+  initialBlockCells:
+  - {x: 2, y: 14}
+  - {x: 3, y: 14}
+  - {x: 4, y: 14}
+  - {x: 5, y: 14}
+  - {x: 6, y: 14}
+  - {x: 4, y: 13}
+  - {x: 1, y: 11}
+  - {x: 2, y: 11}
+  - {x: 3, y: 11}
+  - {x: 4, y: 11}
+  - {x: 5, y: 11}
+  - {x: 6, y: 11}
+  - {x: 7, y: 11}
+  - {x: 4, y: 12}
+  - {x: 2, y: 6}
+  - {x: 3, y: 6}
+  - {x: 4, y: 6}
+  - {x: 5, y: 6}
+  - {x: 6, y: 6}
+  - {x: 2, y: 5}
+  - {x: 6, y: 5}
+  - {x: 2, y: 4}
+  - {x: 6, y: 4}
+  - {x: 2, y: 3}
+  - {x: 6, y: 3}
+  - {x: 2, y: 1}
+  - {x: 3, y: 1}
+  - {x: 4, y: 1}
+  - {x: 5, y: 1}
+  - {x: 6, y: 1}
+  - {x: 2, y: 2}
+  - {x: 6, y: 2}
+  allowedPieces:
+  - piece: {fileID: 11400000, guid: a440bdea869cd094f8880d82b69d7608, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: d5e40e049e4d3634ab79a6452a6a39d4, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: 013e43efac6c2cc448151cd5ac6c9412, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: 4aaba1431e00d0f4fa089781bc4b8cba, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: 748daa09da465a441ad4d0067ae53ce2, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: 14b031217a6824c4c83de98de496a76c, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: 713204cfdf4906f4a8c19ae574f71ea0, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: 5a636540f7d8a5e439b0403243b8ee44, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: 684d701059244774fb6491b1008443b0, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: fd19136a4738ff64dbcb1700d3c54ed1, type: 2}
+    weight: 1
+  - piece: {fileID: 11400000, guid: 89dd3ebf2cf601d47a2a1662025c626a, type: 2}
+    weight: 2
+  - piece: {fileID: 11400000, guid: 60f0dba0a8e953b4bbd843bba85fa89e, type: 2}
+    weight: 2
+  - piece: {fileID: 11400000, guid: c7b4ac6dbf9dda242bf66403190c68a8, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: 7ceb0eaeed6e09945858d37776c0dd80, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: a5664bb563f181c4e8ea0162a2ab058d, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: 3ffdc65e3c904dc4ab8347500fb2cab3, type: 2}
+    weight: 3
+  - piece: {fileID: 11400000, guid: 92b00981f9498bc4998649cf5ea97890, type: 2}
+    weight: 2
+  - piece: {fileID: 11400000, guid: 207d2b28b3ab9ae40bbb59dd2037802a, type: 2}
+    weight: 2
+  - piece: {fileID: 11400000, guid: 5a64d823ecb98064caf59c1c6c149d84, type: 2}
+    weight: 2
+  initialBlockSprite: {fileID: 2832721045241568169, guid: be2877c1387fddc4e91cd4f7ff122391, type: 3}
+  RestCount: 100
