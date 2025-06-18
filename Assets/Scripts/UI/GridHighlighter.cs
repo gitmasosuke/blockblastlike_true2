@@ -36,10 +36,13 @@ public class GridHighlighter : MonoBehaviour
 
         Color col = ok ? okColor : ngColor;
         int index = 0;
+        // 盤面とのズレを補正するため、表示位置をオフセット
+        const int offsetX = 2;
+        const int offsetY = 1;
         foreach (var c in cells)
         {
-            int x = origin.x + c.x;
-            int y = origin.y + c.y;
+            int x = origin.x + c.x + offsetX;
+            int y = origin.y + c.y + offsetY;
             if (x < 0 || x >= GridManager.Width || y < 0 || y >= GridManager.Height)
                 continue;
 
