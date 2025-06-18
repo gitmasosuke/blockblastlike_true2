@@ -4,14 +4,12 @@ using UnityEngine.UI;
 
 public class GridHighlighter : MonoBehaviour
 {
-    [SerializeField] private Sprite highlightSprite;  // 1~1 ”’ PNG
+    [SerializeField] private Sprite highlightSprite;  // 1Ã—1 ç™½ PNG
     [SerializeField] private Color okColor = new Color(1f, 1f, 1f, 0.25f);
     [SerializeField] private Color ngColor = new Color(1f, 0f, 0f, 0.25f);
 
-    private readonly List<RectTransform> _marks = new List<RectTransform>();
-
-
-    /// <summary>ƒhƒ‰ƒbƒO’†‚É¶¬‚·‚é Image ƒv[ƒ‹</summary>
+    // ä»¥å‰ã¯ç”Ÿæˆã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’éƒ½åº¦ç ´æ£„ã—ã¦ã„ãŸãŒã€
+    // ãƒ¢ãƒã‚¤ãƒ«ç«¯æœ«ã§ã¯ GC è² è·ãŒå¤§ãããªã‚‹ãŸã‚ãƒ—ãƒ¼ãƒ«æ–¹å¼ã«å¤‰æ›´
     private readonly List<Image> _pool = new();
 
     private RectTransform _rtGrid;
@@ -19,14 +17,14 @@ public class GridHighlighter : MonoBehaviour
 
 
     /// <summary>
-    /// w’è‚ÌƒZƒ‹ŒQ‚ğƒnƒCƒ‰ƒCƒg•\¦‚µ‚Ü‚·B
+    /// æŒ‡å®šã®ã‚»ãƒ«ç¾¤ã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆè¡¨ç¤ºã—ã¾ã™ã€‚
     /// </summary>
-    /// <param name="cells">ƒs[ƒX‚Ì‘Š‘ÎƒZƒ‹À•W”z—ñ</param>
-    /// <param name="origin">ƒOƒŠƒbƒhã‚ÌŒ´“_ƒZƒ‹À•W</param>
-    /// <param name="ok">”z’u‰Â”\‚È‚ç truei”’jA•s‰Â‚È‚ç falseiÔj</param>
+    /// <param name="cells">ãƒ”ãƒ¼ã‚¹ã®ç›¸å¯¾ã‚»ãƒ«åº§æ¨™é…åˆ—</param>
+    /// <param name="origin">ã‚°ãƒªãƒƒãƒ‰ä¸Šã®åŸç‚¹ã‚»ãƒ«åº§æ¨™</param>
+    /// <param name="ok">é…ç½®å¯èƒ½ãªã‚‰ trueï¼ˆç™½ï¼‰ã€ä¸å¯ãªã‚‰ falseï¼ˆèµ¤ï¼‰</param>
     public void Show(Vector2Int[] cells, Vector2Int origin, bool ok)
     {
-        Clear();
+        Hide();
 
         var grid = GameManager.Instance.gridManager;
         var rtGrid = grid.GetComponent<RectTransform>();
@@ -34,6 +32,10 @@ public class GridHighlighter : MonoBehaviour
         float halfW = rtGrid.rect.width * 0.5f;
         float halfH = rtGrid.rect.height * 0.5f;
 
+        EnsurePoolSize(cells.Length);
+
+        Color col = ok ? okColor : ngColor;
+        int index = 0;
         foreach (var c in cells)
         {
             int x = origin.x + c.x;
@@ -41,15 +43,9 @@ public class GridHighlighter : MonoBehaviour
             if (x < 0 || x >= GridManager.Width || y < 0 || y >= GridManager.Height)
                 continue;
 
-            var go = new GameObject($"Hl_{x}_{y}",
-                                    typeof(RectTransform),
-                                    typeof(CanvasRenderer),
-                                    typeof(Image));
-            go.transform.SetParent(transform, false);
-
-            var rt = go.GetComponent<RectTransform>();
-            rt.anchorMin = new Vector2(0.5f, 0.5f);
-            rt.anchorMax = new Vector2(0.5f, 0.5f);
+            var img = _pool[index++];
+            var rt = img.rectTransform;
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
             rt.pivot = new Vector2(0.5f, 0.5f);
             rt.sizeDelta = Vector2.one * cs;
             rt.anchoredPosition = new Vector2(
@@ -57,34 +53,28 @@ public class GridHighlighter : MonoBehaviour
                 y * cs - halfH + (cs * 0.5f)
             );
 
-            var img = go.GetComponent<Image>();
-            img.sprite = highlightSprite;
-            img.preserveAspect = true;
-            img.raycastTarget = false;
-            img.color = ok ? okColor : ngColor;
-
-            _marks.Add(rt);
+            img.color = col;
+            img.enabled = true;
         }
     }
 
-    /// <summary>‘SƒnƒCƒ‰ƒCƒg‚ğÁ‚·</summary>
-
+    /// <summary>å…¨ãƒã‚¤ãƒ©ã‚¤ãƒˆã‚’éè¡¨ç¤ºã«ã—ã¾ã™ã€‚</summary>
     public void Hide()
     {
         foreach (var img in _pool) img.enabled = false;
     }
 
-        void EnsurePoolSize(int n)
+    void EnsurePoolSize(int n)
     {
         while (_pool.Count < n)
         {
-            var go = new GameObject("HL", typeof(RectTransform));
+            var go = new GameObject("HL", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
             go.transform.SetParent(transform, false);
-            var img = go.AddComponent<Image>();
+            var img = go.GetComponent<Image>();
             img.sprite = highlightSprite;
             img.raycastTarget = false;
-            img.rectTransform.pivot = Vector2.zero;
-            img.rectTransform.sizeDelta = new Vector2(_cellW, _cellH);
+            img.rectTransform.anchorMin = img.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            img.rectTransform.pivot = new Vector2(0.5f, 0.5f);
             img.enabled = false;
             _pool.Add(img);
         }
@@ -92,8 +82,6 @@ public class GridHighlighter : MonoBehaviour
 
     public void Clear()
     {
-        foreach (var rt in _marks)
-            if (rt != null) Destroy(rt.gameObject);
-        _marks.Clear();
+        Hide();
     }
 }
