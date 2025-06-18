@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11791a10e808f4945a752038a1b2470b, type: 3}
   m_Name: AlbumMasterData
   m_EditorClassIdentifier: 
-  entries:
+  Entries:
   - idollID: 1
     thumbnail: {fileID: 6771898881265339701, guid: 3434a081ad4e78d4c9204cef72825568, type: 3}
   - idollID: 2

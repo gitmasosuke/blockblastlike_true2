@@ -75,12 +75,19 @@ public class AlbumController : MonoBehaviour
     public IdollMasterData idollMaster;
     public RectTransform contentParent;
     public GameObject albumItemPrefab;
-
-    // ← ここを追加
     public static int SelectedIdollID { get; private set; }
 
     void Start()
     {
+
+        // --- nullチェック ---
+        //if (bgMaster == null) Debug.LogError("bgMaster が Inspector 未設定です");
+        if (idollMaster == null) Debug.LogError("idollMaster が Inspector 未設定です");
+        if (contentParent == null) Debug.LogError("contentParent が Inspector 未設定です");
+        if (albumItemPrefab == null) Debug.LogError("thumbPrefab が Inspector 未設定です");
+        //if (bgMaster == null || idollMaster == null || contentParent == null || thumbPrefab == null)
+        //    return; // いずれか不足していたら以降実行しない
+
         // Inspector チェック
         if (albumMaster == null || idollMaster == null ||
             contentParent == null || albumItemPrefab == null)
@@ -98,7 +105,7 @@ public class AlbumController : MonoBehaviour
                         .ToDictionary(e => e.idolID, e => e.idolName);
 
 
-        foreach (var entry in albumMaster.entries)
+        foreach (var entry in albumMaster.Entries)
         {
             var go = Instantiate(albumItemPrefab, contentParent);
 
@@ -112,6 +119,8 @@ public class AlbumController : MonoBehaviour
             }
             else { Debug.Log("サムネ処理されず"); }
 
+            Debug.Log("idollID" + entry.idollID);
+
             // 名前設定
             var txt = go.transform.Find("NameText")?.GetComponent<TextMeshProUGUI>();
             if (txt != null)
@@ -123,12 +132,22 @@ public class AlbumController : MonoBehaviour
             }
 
             // ボタンクリック時のリスナー登録
-            var btn = go.GetComponent<Button>();
-            int id = entry.idollID;
+            var btn = go.transform.Find("Button")?.GetComponent<Button>();
+
+            //int id = entry.idollID;
             btn.onClick.AddListener(() => {
-                SelectedIdollID = id;
+                SelectedIdollID = entry.idollID;
+
+                // ← ここで PlayerPrefs にも保存
+                PlayerPrefs.SetInt("AlbumSelectedIdoll", entry.idollID);
+                PlayerPrefs.Save();
+
+                Debug.Log("AlbumDetailSceneロード！アイドルID="+ SelectedIdollID);
+
                 SceneManager.LoadScene("AlbumDetailScene");
             });
         }
     }
+
+
 }

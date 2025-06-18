@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 455aa76da8534c547a67b4dfb7028d0d
+guid: 3222c1c253977504dae9ec69213a0faa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 500984439042832196
-    second: LoginBonusIcon_0
-  - first:
-      213: -1513241914499371037
-    second: LoginBonusIcon_1
-  - first:
-      213: 8559251468471803998
-    second: LoginBonusIcon_2
-  - first:
-      213: -6781490968900541332
-    second: LoginBonusIcon_3
-  - first:
-      213: 2058839905884709617
-    second: LoginBonusIcon_4
+      213: -4571828015118065507
+    second: back_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -151,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LoginBonusIcon_0
+      name: back_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 28
-        width: 1176
-        height: 812
+        x: 253
+        y: 53
+        width: 1094
+        height: 1094
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,96 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 447752761bad3f600800000000000000
-      internalID: 500984439042832196
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LoginBonusIcon_1
-      rect:
-        serializedVersion: 2
-        x: 869
-        y: 799
-        width: 30
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3ef680b0f72effae0800000000000000
-      internalID: -1513241914499371037
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LoginBonusIcon_2
-      rect:
-        serializedVersion: 2
-        x: 945
-        y: 716
-        width: 78
-        height: 138
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e50a0899cd198c670800000000000000
-      internalID: 8559251468471803998
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LoginBonusIcon_3
-      rect:
-        serializedVersion: 2
-        x: 1098
-        y: 610
-        width: 119
-        height: 103
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c64e927c4ed43e1a0800000000000000
-      internalID: -6781490968900541332
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LoginBonusIcon_4
-      rect:
-        serializedVersion: 2
-        x: 1185
-        y: 560
-        width: 65
-        height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1f228a77cf7729c10800000000000000
-      internalID: 2058839905884709617
+      spriteID: d9065b094aa9d80c0800000000000000
+      internalID: -4571828015118065507
       vertices: []
       indices: 
       edges: []
@@ -273,12 +173,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      LoginBonusIcon_0: 500984439042832196
-      LoginBonusIcon_1: -1513241914499371037
-      LoginBonusIcon_2: 8559251468471803998
-      LoginBonusIcon_3: -6781490968900541332
-      LoginBonusIcon_4: 2058839905884709617
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 public class AlbumDetailController : MonoBehaviour
 {
@@ -14,7 +15,12 @@ public class AlbumDetailController : MonoBehaviour
 
     void Start()
     {
+
+        Debug.Log("ディティールコントローラー入った");
+
         int selectedIdollId = PlayerPrefs.GetInt("AlbumSelectedIdoll", 0);
+
+        Debug.Log("アルバムマスタ表示アイドルID" + selectedIdollId);
 
         // 1) 該当アイドルのレコード抽出
         var records = bgMaster.records

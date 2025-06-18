@@ -5,7 +5,7 @@ using UnityEngine;
 public class AlbumMasterData : ScriptableObject
 {
     [Tooltip("アルバムに登録する各アイテム")]
-    public AlbumEntry[] entries;
+    public AlbumEntry[] Entries;
 }
 
 [System.Serializable]
