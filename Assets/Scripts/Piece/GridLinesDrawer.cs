@@ -7,7 +7,7 @@ public class GridLinesDrawer : MaskableGraphic
     public Color lineColor = new Color(1, 1, 1, 0.1f);
     public float thickness = 2f;
 
-    private static readonly Vector2Int kLineOffset = new Vector2Int(+6, +6); // © 6ƒZƒ‹‰EEã‚Ö
+    private static readonly Vector2Int kLineOffset = new Vector2Int(0, 0); // zero offset
 
     protected override void OnPopulateMesh(VertexHelper vh)
     {
@@ -20,7 +20,7 @@ public class GridLinesDrawer : MaskableGraphic
         float cellW = w / GridManager.Width;
         float cellH = h / GridManager.Height;
 
-        // ‚’¼ü
+        // å‚ç›´ç·š
         for (int i = 0; i <= GridManager.Width; i++)
             AddLine(vh,
             new Vector2((i + kLineOffset.x) * cellW - pivotOff.x,
@@ -28,7 +28,7 @@ public class GridLinesDrawer : MaskableGraphic
             new Vector2((i + kLineOffset.x) * cellW - pivotOff.x,
             h - pivotOff.y));
 
-        // …•½ü
+        // æ°´å¹³ç·š
         for (int j = 0; j <= GridManager.Height; j++)
             AddLine(vh,
             new Vector2(-pivotOff.x,
