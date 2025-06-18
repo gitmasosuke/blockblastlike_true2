@@ -234,7 +234,7 @@ public class DragHandler : MonoBehaviour,
         float rawX = localPoint.x / cellW;
         float rawY = localPoint.y / cellH;
 
-        const float switchThreshold = 0.8f; // ← ここを調整すると判定を手前／奥にシフトできます
+        const float switchThreshold = 0f; // ← ここを調整すると判定を手前／奥にシフトできます
 
         int fx = Mathf.FloorToInt(rawX);
         float fractX = rawX - fx;
