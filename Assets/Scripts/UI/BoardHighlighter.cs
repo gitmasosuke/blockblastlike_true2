@@ -36,13 +36,11 @@ public class BoardHighlighter : MonoBehaviour
 
         Color col = ok ? okColor : ngColor;
         int index = 0;
-        // 盤面とのズレを補正するため、表示位置をオフセット
-        const int offsetX = GridManager.OffsetX;
-        const int offsetY = GridManager.OffsetY;
+        // 盤面とのズレを補正するため、origin からグリッドのオフセットを差し引く
         foreach (var c in cells)
         {
-            int x = origin.x + c.x + offsetX;
-            int y = origin.y + c.y + offsetY;
+            int x = origin.x - GridManager.OffsetX + c.x;
+            int y = origin.y - GridManager.OffsetY + c.y;
             if (x < 0 || x >= GridManager.Width || y < 0 || y >= GridManager.Height)
                 continue;
 
