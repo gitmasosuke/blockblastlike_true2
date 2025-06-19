@@ -7,10 +7,11 @@ public class UIInitializer : MonoBehaviour
 {
     void Awake()
     {
-        Debug.Log("‰Šú‰»ˆ—ÀsI");
+            // Pivot must remain centered for BoardHighlighter calculations
+            rtGrid.pivot = new Vector2(0.5f, 0.5f);
 
 
-        // ¡ Canvas ‚Ì Scale ‚ğ 1,1,1 ‚É–ß‚·
+        // â–  Canvas ã® Scale ã‚’ 1,1,1 ã«æˆ»ã™
         var canvas = Object.FindAnyObjectByType<Canvas>();
         if (canvas != null)
         {
@@ -18,7 +19,7 @@ public class UIInitializer : MonoBehaviour
             rtCanvas.localScale = Vector3.one;
         }
 
-        // ¡ GridManager ‚Ì RectTransform ‚ğƒŠƒZƒbƒg
+        // â–  GridManager ã® RectTransform ã‚’ãƒªã‚»ãƒƒãƒˆ
         var gridGO = GameObject.Find("Canvas/GridManager");
         if (gridGO != null)
         {
