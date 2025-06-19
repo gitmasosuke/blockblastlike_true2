@@ -27,8 +27,17 @@ public class DragHandler : MonoBehaviour,
         _rect = GetComponent<RectTransform>();
         _canvas = GetComponentInParent<Canvas>();
         _pieceUI = GetComponent<PieceUI>();
-        _highlighter = GameManager.Instance.gridManager
-                                    .GetComponent<BoardHighlighter>();
+
+        if (GameManager.Instance != null &&
+            GameManager.Instance.gridManager != null)
+        {
+            _highlighter = GameManager.Instance.gridManager
+                                        .GetComponent<BoardHighlighter>();
+        }
+        else
+        {
+            Debug.LogError("[DragHandler] GameManager or GridManager is missing");
+        }
         // 手札時の元の拡大率を保存
         _originalScale = transform.localScale;
     }
@@ -36,12 +45,28 @@ public class DragHandler : MonoBehaviour,
     // ドラッグ開始時
     public void OnBeginDrag(PointerEventData eventData)
     {
+        // GameManager が取得できなければ処理しない
+        if (GameManager.Instance == null ||
+            GameManager.Instance.gridManager == null)
+        {
+            Debug.LogError("[DragHandler] Cannot start drag - GameManager missing");
+            return;
+        }
+
         // 親と位置を覚えておく
         _originalParent = transform.parent;
         _originalAnchoredPos = GetComponent<RectTransform>().anchoredPosition;
 
         // グリッド上の「1セル辺長」を取得
         float gridSize = GameManager.Instance.gridManager.CellSize;
+
+        if (_pieceUI == null)
+            _pieceUI = GetComponent<PieceUI>();
+        if (_pieceUI == null)
+        {
+            Debug.LogError("[DragHandler] PieceUI component missing");
+            return;
+        }
 
         // 手札表示時に PieceUI が使っている1セル辺長
         float handSize = _pieceUI.CellSizeInHand;
@@ -72,6 +97,10 @@ public class DragHandler : MonoBehaviour,
     // ドラッグ中
     public void OnDrag(PointerEventData eventData)
     {
+        if (GameManager.Instance == null ||
+            GameManager.Instance.gridManager == null)
+            return;
+
         // UI Canvas 上で動かす
         _rect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
 
@@ -84,6 +113,10 @@ public class DragHandler : MonoBehaviour,
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (GameManager.Instance == null ||
+            GameManager.Instance.gridManager == null)
+            return;
+
         // ハイライトを消す
         _highlighter.Clear();
 
@@ -145,6 +178,11 @@ public class DragHandler : MonoBehaviour,
         }
         */
 
+        if (GameManager.Instance == null ||
+            GameManager.Instance.gridManager == null ||
+            _highlighter == null)
+            return;
+
         var grid = GameManager.Instance.gridManager;
         var rtGrid = grid.GetComponent<RectTransform>();
 
@@ -197,6 +235,14 @@ public class DragHandler : MonoBehaviour,
                                out float cellW,
                                out float cellH)
     {
+        if (GameManager.Instance == null ||
+            GameManager.Instance.gridManager == null)
+        {
+            origin = Vector2Int.zero;
+            cellW = cellH = 0f;
+            return false;
+        }
+
         // GridManager とその RectTransform を取得
         var grid = GameManager.Instance.gridManager;
         var rtGrid = grid.GetComponent<RectTransform>();
