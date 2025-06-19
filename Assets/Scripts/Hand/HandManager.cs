@@ -2,47 +2,47 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// èD 3 –‡‚Ì¶¬E·‚µ‘Ö‚¦‚ğs‚¤ƒ}ƒl[ƒWƒƒ
-/// „Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
-/// EScene ‹N“® / ƒXƒe[ƒWŠJn‚É InitHand() ‚ğŒÄ‚Ô
-/// Eƒ~ƒmiPieceUIj‚ğ”Õ–Ê‚É’u‚¢‚½‚ç ReplacePiece() ‚ğŒÄ‚ñ‚Å
-///   èD‚ğí‚É 3 –‡‚É•Û‚Â
+/// æ‰‹æœ­ 3 æšã®ç”Ÿæˆãƒ»å·®ã—æ›¿ãˆã‚’è¡Œã†ãƒãƒãƒ¼ã‚¸ãƒ£
+/// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/// ãƒ»Scene èµ·å‹•æ™‚ / ã‚¹ãƒ†ãƒ¼ã‚¸é–‹å§‹æ™‚ã« InitHand() ã‚’å‘¼ã¶
+/// ãƒ»ãƒŸãƒï¼ˆPieceUIï¼‰ã‚’ç›¤é¢ã«ç½®ã„ãŸã‚‰ ReplacePiece() ã‚’å‘¼ã‚“ã§
+///   æ‰‹æœ­ã‚’å¸¸ã« 3 æšã«ä¿ã¤
 /// </summary>
 public class HandManager : MonoBehaviour
 {
-    [Header("èD‚ğ•À‚×‚ée")]
+    [Header("æ‰‹æœ­ã‚’ä¸¦ã¹ã‚‹è¦ª")]
     public RectTransform handRoot;
 
-    [Header("èDƒs[ƒX‚ÌƒvƒŒƒnƒu (PieceUI)")]
+    [Header("æ‰‹æœ­ãƒ”ãƒ¼ã‚¹ã®ãƒ—ãƒ¬ãƒãƒ– (PieceUI)")]
     public PieceUI pieceUIPrefab;
 
     const int HAND_SIZE = 3;
 
-    // ƒXƒe[ƒWİ’è‚ğó‚¯æ‚Á‚Ä•Û‚·‚é
+    // ã‚¹ãƒ†ãƒ¼ã‚¸è¨­å®šã‚’å—ã‘å–ã£ã¦ä¿æŒã™ã‚‹
     StageData _stageData;
 
-    [Header("‚±‚ÌƒXƒe[ƒW‚ÅoŒ»‰Â”\‚È PieceData")]
+    [Header("ã“ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã§å‡ºç¾å¯èƒ½ãª PieceData")]
     public PieceData[] allowedPieces;
 
-    /// <summary>ƒXƒe[ƒWŠJn‚ÉŒÄ‚Ô</summary>
+    /// <summary>ã‚¹ãƒ†ãƒ¼ã‚¸é–‹å§‹æ™‚ã«å‘¼ã¶</summary>
     public void InitHand(StageData stageData)
     {
         Debug.Log("InitHand");
 
         _stageData = stageData;
 
-        // Šù‘¶‚ÌèD‚ğƒNƒŠƒA
+        // æ—¢å­˜ã®æ‰‹æœ­ã‚’ã‚¯ãƒªã‚¢
         foreach (Transform t in handRoot)
             Destroy(t.gameObject);
 
-        // •K—v–‡”‚¾‚¯¶¬
+        // å¿…è¦æšæ•°ã ã‘ç”Ÿæˆ
         for (int i = 0; i < HAND_SIZE; i++)
             CreatePiece();
     }
 
     /// <summary>
-    /// ”Õ–Ê‚É”z’u‚µI‚í‚Á‚½ PieceUI ‚ğ“n‚·‚ÆA
-    /// ”jŠü‚µ‚ÄV‚µ‚¢ƒs[ƒX‚ğ•â[‚·‚é
+    /// ç›¤é¢ã«é…ç½®ã—çµ‚ã‚ã£ãŸ PieceUI ã‚’æ¸¡ã™ã¨ã€
+    /// ç ´æ£„ã—ã¦æ–°ã—ã„ãƒ”ãƒ¼ã‚¹ã‚’è£œå……ã™ã‚‹
     /// </summary>
     public void ReplacePiece(PieceUI used)
     {
@@ -52,18 +52,18 @@ public class HandManager : MonoBehaviour
         CreatePiece();
     }
 
-    /// <summary>èDƒs[ƒX‚ğ 1 ‚Â¶¬‚µ‚Ä handRoot ‚É•À‚×‚é</summary>
+    /// <summary>æ‰‹æœ­ãƒ”ãƒ¼ã‚¹ã‚’ 1 ã¤ç”Ÿæˆã—ã¦ handRoot ã«ä¸¦ã¹ã‚‹</summary>
     void CreatePiece()
     {
         if (_stageData == null ||
             _stageData.allowedPieces == null ||
             _stageData.allowedPieces.Length == 0)
         {
-            Debug.LogError("ƒXƒe[ƒWİ’è‚Ì allowedPieces ‚ª‹ó‚Å‚·");
+            Debug.LogError("ã‚¹ãƒ†ãƒ¼ã‚¸è¨­å®šã® allowedPieces ãŒç©ºã§ã™");
             return;
         }
 
-        // d‚İ•t‚«ƒ‰ƒ“ƒ_ƒ€‚Å PieceData ‚ğ‘I‘ğ
+        // é‡ã¿ä»˜ããƒ©ãƒ³ãƒ€ãƒ ã§ PieceData ã‚’é¸æŠ
         var data = allowedPieces[Random.Range(0, allowedPieces.Length)];
         if (data == null) return;
 
@@ -72,21 +72,21 @@ public class HandManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒXƒe[ƒWƒf[ƒ^‚Ì allowedPieces ‚©‚çA
-    /// weight ‚É]‚Á‚½d‚İ•t‚«ƒ‰ƒ“ƒ_ƒ€‚Å PieceData ‚ğ•Ô‚·
+    /// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã® allowedPieces ã‹ã‚‰ã€
+    /// weight ã«å¾“ã£ãŸé‡ã¿ä»˜ããƒ©ãƒ³ãƒ€ãƒ ã§ PieceData ã‚’è¿”ã™
     /// </summary>
     PieceData PickWeightedRandomPiece()
     {
-        // 1) ‡ŒvƒEƒFƒCƒg‚ğŒvZ
+        // 1) åˆè¨ˆã‚¦ã‚§ã‚¤ãƒˆã‚’è¨ˆç®—
         int total = 0;
         foreach (var wp in _stageData.allowedPieces)
             total += Mathf.Max(wp.weight, 0);
 
-        // 2) —”‚ğˆø‚­ [0, total)
+        // 2) ä¹±æ•°ã‚’å¼•ã [0, total)
         int r = Random.Range(0, total);
 
-        // 3) —İÏ‚µ‚Ä’´‚¦‚½Å‰‚Ì—v‘f‚ğ•Ô‹p
-        int sum = 0;
+            for (int x = GridManager.OffsetX; x < GridManager.OffsetX + GridManager.Width; x++)
+                for (int y = GridManager.OffsetY; y < GridManager.OffsetY + GridManager.Height; y++)
         foreach (var wp in _stageData.allowedPieces)
         {
             sum += Mathf.Max(wp.weight, 0);
@@ -94,12 +94,12 @@ public class HandManager : MonoBehaviour
                 return wp.piece;
         }
 
-        // –œˆê‚ÌƒtƒH[ƒ‹ƒoƒbƒN
+        // ä¸‡ä¸€ã®ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯
         return _stageData.allowedPieces.Last().piece;
     }
 
     /// <summary>
-    /// èD‚Ì‚¢‚¸‚ê‚©‚ª”Õ–Ê‚Ì‚Ç‚±‚©‚É’u‚¯‚é‚©ƒ`ƒFƒbƒN
+    /// æ‰‹æœ­ã®ã„ãšã‚Œã‹ãŒç›¤é¢ã®ã©ã“ã‹ã«ç½®ã‘ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
     /// </summary>
     public bool HasPlacablePiece(GridManager grid)
     {
@@ -108,13 +108,13 @@ public class HandManager : MonoBehaviour
             var ui = t.GetComponent<PieceUI>();
             if (ui == null) continue;
 
-            // ”Õ–Ê‘SƒZƒ‹‚ğ‘–¸‚µ‚ÄˆêƒJŠ‚Å‚à’u‚¯‚ê‚Î true
+            // ç›¤é¢å…¨ã‚»ãƒ«ã‚’èµ°æŸ»ã—ã¦ä¸€ã‚«æ‰€ã§ã‚‚ç½®ã‘ã‚Œã° true
             for (int x = 0; x < GridManager.Width; x++)
                 for (int y = 0; y < GridManager.Height; y++)
                     if (grid.CanPlace(ui.data.cells, new Vector2Int(x, y)))
                         return true;
         }
-        return false;   // ‚·‚×‚Ä’u‚¯‚È‚¢
+        return false;   // ã™ã¹ã¦ç½®ã‘ãªã„
     }
 
 }
