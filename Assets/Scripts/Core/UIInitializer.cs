@@ -7,10 +7,6 @@ public class UIInitializer : MonoBehaviour
 {
     void Awake()
     {
-            // Pivot must remain centered for BoardHighlighter calculations
-            rtGrid.pivot = new Vector2(0.5f, 0.5f);
-
-
         // ■ Canvas の Scale を 1,1,1 に戻す
         var canvas = Object.FindAnyObjectByType<Canvas>();
         if (canvas != null)
@@ -24,7 +20,8 @@ public class UIInitializer : MonoBehaviour
         if (gridGO != null)
         {
             var rtGrid = gridGO.GetComponent<RectTransform>();
-            rtGrid.pivot = Vector2.zero;
+            // Pivot must remain centered for BoardHighlighter calculations
+            rtGrid.pivot = new Vector2(0.5f, 0.5f);
             rtGrid.localRotation = Quaternion.identity;
             rtGrid.localScale = Vector3.one;
             rtGrid.sizeDelta = new Vector2(640, 640);
