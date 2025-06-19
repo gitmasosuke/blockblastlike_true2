@@ -55,7 +55,11 @@ public class DragHandler : MonoBehaviour,
 
         // 親と位置を覚えておく
         _originalParent = transform.parent;
-        _originalAnchoredPos = GetComponent<RectTransform>().anchoredPosition;
+        _originalAnchoredPos = _rect.anchoredPosition;
+
+        // ルート Canvas にぶら下げてスクリーン座標で移動できるように
+        transform.SetParent(_canvas.transform, true);
+        transform.SetAsLastSibling();
 
         // グリッド上の「1セル辺長」を取得
         float gridSize = GameManager.Instance.gridManager.CellSize;
@@ -154,7 +158,8 @@ public class DragHandler : MonoBehaviour,
         }
 
         // ここまで来たら “置けない” とみなして手札に戻す
-        _rect.anchoredPosition = Vector2.zero;
+        transform.SetParent(_originalParent, true);
+        _rect.anchoredPosition = _originalAnchoredPos;
         transform.localScale = _originalScale;
         _rect.pivot = new Vector2(0, 0.5f);
     }
