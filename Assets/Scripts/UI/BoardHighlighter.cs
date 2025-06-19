@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GridHighlighter : MonoBehaviour
+public class BoardHighlighter : MonoBehaviour
 {
     [SerializeField] private Sprite highlightSprite;  // 1×1 白 PNG
     [SerializeField] private Color okColor = new Color(1f, 1f, 1f, 0.25f);
