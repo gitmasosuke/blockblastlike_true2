@@ -9,7 +9,7 @@ public class DragHandler : MonoBehaviour,
     RectTransform _rect;
     Canvas _canvas;
     PieceUI _pieceUI;
-    GridHighlighter _highlighter;
+    BoardHighlighter _highlighter;
     Vector3 _originalScale;
 
     // 追加：
@@ -28,7 +28,7 @@ public class DragHandler : MonoBehaviour,
         _canvas = GetComponentInParent<Canvas>();
         _pieceUI = GetComponent<PieceUI>();
         _highlighter = GameManager.Instance.gridManager
-                                    .GetComponent<GridHighlighter>();
+                                    .GetComponent<BoardHighlighter>();
         // 手札時の元の拡大率を保存
         _originalScale = transform.localScale;
     }
