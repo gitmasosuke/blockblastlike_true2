@@ -85,8 +85,7 @@ public class HandManager : MonoBehaviour
         // 2) 乱数を引く [0, total)
         int r = Random.Range(0, total);
 
-            for (int x = GridManager.OffsetX; x < GridManager.OffsetX + GridManager.Width; x++)
-                for (int y = GridManager.OffsetY; y < GridManager.OffsetY + GridManager.Height; y++)
+        int sum = 0;
         foreach (var wp in _stageData.allowedPieces)
         {
             sum += Mathf.Max(wp.weight, 0);
