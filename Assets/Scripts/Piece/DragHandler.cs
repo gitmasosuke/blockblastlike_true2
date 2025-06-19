@@ -246,7 +246,8 @@ public class DragHandler : MonoBehaviour,
         int oy = (fractY >= switchThreshold) ? fy + 1 : fy;
         oy = Mathf.Clamp(oy, 0, GridManager.Height - 1);
 
-        origin = new Vector2Int(ox, oy);
+        origin = new Vector2Int(ox + GridManager.OffsetX,
+                                oy + GridManager.OffsetY);
 
         // ⑤ その位置にピースを置けるか判定して返す
         return grid.CanPlace(_pieceUI.data.cells, origin);
