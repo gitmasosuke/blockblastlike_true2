@@ -91,7 +91,8 @@ public class DragHandler : MonoBehaviour,
         Vector2 bottomLeftScreen = RectTransformUtility.WorldToScreenPoint(
             _canvas.worldCamera, worldBottomLeft);
 
-        _dragOffset = eventData.position - bottomLeftScreen;
+        // Scale the offset so the grabbed cell stays under the pointer
+        _dragOffset = (eventData.position - bottomLeftScreen) * scale;
 
         // 最初のハイライト表示
         UpdateHighlight(eventData);
