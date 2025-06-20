@@ -11,8 +11,6 @@ public class GridManager : MonoBehaviour
 {
     public const int Width = 10;  // 列数
     public const int Height = 16; // 行数
-    public const int OffsetX = 2; // 表示上のXオフセット
-    public const int OffsetY = 1; // 表示上のYオフセット
 
     /// <summary>累計開放セル数</summary>
     public int OpenedBackgroundCells { get; private set; }
@@ -142,8 +140,8 @@ public class GridManager : MonoBehaviour
     {
         foreach (var c in cells)
         {
-            int x = origin.x - OffsetX + c.x;
-            int y = origin.y - OffsetY + c.y;
+            int x = origin.x + c.x;
+            int y = origin.y + c.y;
             if (x < 0 || x >= Width || y < 0 || y >= Height) return false;
             if (_grid[x, y] != 0) return false;
         }
@@ -156,16 +154,16 @@ public class GridManager : MonoBehaviour
         // 論理グリッド
         foreach (var c in data.cells)
         {
-            int x = origin.x - OffsetX + c.x;
-            int y = origin.y - OffsetY + c.y;
+            int x = origin.x + c.x;
+            int y = origin.y + c.y;
             if (x < 0 || x >= Width || y < 0 || y >= Height) continue;
             _grid[x, y] = 1;
         }
         // 見た目ブロック
         foreach (var c in data.cells)
         {
-            int x = origin.x - OffsetX + c.x;
-            int y = origin.y - OffsetY + c.y;
+            int x = origin.x + c.x;
+            int y = origin.y + c.y;
             if (x < 0 || x >= Width || y < 0 || y >= Height) continue;
             var go = new GameObject("Block",
                                     typeof(RectTransform),

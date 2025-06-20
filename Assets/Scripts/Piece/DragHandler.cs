@@ -290,8 +290,8 @@ public class DragHandler : MonoBehaviour,
         ox = Mathf.Clamp(ox, 0, GridManager.Width - 1);
         oy = Mathf.Clamp(oy, 0, GridManager.Height - 1);
 
-        origin = new Vector2Int(ox + GridManager.OffsetX,
-                                oy + GridManager.OffsetY);
+        // グリッド座標をそのまま返す
+        origin = new Vector2Int(ox, oy);
 
         // ⑤ その位置にピースを置けるか判定して返す
         return grid.CanPlace(_pieceUI.data.cells, origin);
