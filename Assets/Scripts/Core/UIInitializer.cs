@@ -24,7 +24,10 @@ public class UIInitializer : MonoBehaviour
         {
             var rtGrid = gridGO.GetComponent<RectTransform>();
             // Pivot must remain centered for BoardHighlighter calculations
+            rtGrid.anchorMin = new Vector2(0.5f, 0.5f);
+            rtGrid.anchorMax = new Vector2(0.5f, 0.5f);
             rtGrid.pivot = new Vector2(0.5f, 0.5f);
+            rtGrid.anchoredPosition = Vector2.zero;
             rtGrid.localRotation = Quaternion.identity;
             rtGrid.localScale = Vector3.one;
             rtGrid.sizeDelta = new Vector2(640, 640);
