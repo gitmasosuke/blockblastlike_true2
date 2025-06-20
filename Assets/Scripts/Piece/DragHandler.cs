@@ -145,7 +145,7 @@ public class DragHandler : MonoBehaviour,
 
                 // スケール／ピボットは最後に戻す
                 transform.localScale = _originalScale;
-                _rect.pivot = new Vector2(0, 0.5f);
+                _rect.pivot = Vector2.zero; // restore bottom-left pivot
                 return;
             }
         }
@@ -160,7 +160,7 @@ public class DragHandler : MonoBehaviour,
         transform.SetParent(_originalParent, true);
         _rect.anchoredPosition = _originalAnchoredPos;
         transform.localScale = _originalScale;
-        _rect.pivot = new Vector2(0, 0.5f);
+        _rect.pivot = Vector2.zero; // restore bottom-left pivot
     }
 
 

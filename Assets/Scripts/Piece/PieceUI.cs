@@ -31,6 +31,7 @@ public class PieceUI : MonoBehaviour
             if (c.y > maxY) maxY = c.y;
         }
         var rtRoot = GetComponent<RectTransform>();
+        rtRoot.pivot = Vector2.zero; // pivot at lower-left so child cells align
         rtRoot.sizeDelta = new Vector2(
             (maxX + 1) * ThumbCellSize,
             (maxY + 1) * ThumbCellSize);
