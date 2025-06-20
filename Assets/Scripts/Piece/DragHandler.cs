@@ -104,8 +104,15 @@ public class DragHandler : MonoBehaviour,
             GameManager.Instance.gridManager == null)
             return;
 
-        // UI Canvas 上で動かす
-        _rect.anchoredPosition += eventData.delta / _canvas.scaleFactor;
+        // UI Canvas 上でドラッグ座標に追従させる
+        Vector2 bottomLeftScreen = eventData.position - _dragOffset;
+        Vector2 localPoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            _canvas.GetComponent<RectTransform>(),
+            bottomLeftScreen,
+            eventData.pressEventCamera,
+            out localPoint);
+        _rect.anchoredPosition = localPoint;
 
         UpdateHighlight(eventData);
 
