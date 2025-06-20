@@ -89,7 +89,7 @@ public class DragHandler : MonoBehaviour,
             -_rect.pivot.y * _rect.rect.height,
             0f));
         Vector2 bottomLeftScreen = RectTransformUtility.WorldToScreenPoint(
-            eventData.pressEventCamera, worldBottomLeft);
+            _canvas.worldCamera, worldBottomLeft);
 
         _dragOffset = eventData.position - bottomLeftScreen;
 
@@ -104,15 +104,33 @@ public class DragHandler : MonoBehaviour,
             GameManager.Instance.gridManager == null)
             return;
 
-        // UI Canvas 上でドラッグ座標に追従させる
+        // ハイライト位置にピースを合わせる
         Vector2 bottomLeftScreen = eventData.position - _dragOffset;
-        Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            _canvas.GetComponent<RectTransform>(),
-            bottomLeftScreen,
-            eventData.pressEventCamera,
-            out localPoint);
-        _rect.anchoredPosition = localPoint;
+        Vector2Int origin;
+        float cellW, cellH;
+        bool inGrid = GetGridOrigin(bottomLeftScreen, _canvas.worldCamera,
+                                    out origin, out cellW, out cellH);
+
+        if (inGrid || cellW > 0f)
+        {
+            var grid = GameManager.Instance.gridManager;
+            var rtGrid = grid.GetComponent<RectTransform>();
+            float halfW = rtGrid.rect.width * 0.5f;
+            float halfH = rtGrid.rect.height * 0.5f;
+            _rect.anchoredPosition = new Vector2(
+                origin.x * cellW - halfW,
+                origin.y * cellH - halfH);
+        }
+        else
+        {
+            Vector2 localPoint;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                _canvas.GetComponent<RectTransform>(),
+                bottomLeftScreen,
+                _canvas.worldCamera,
+                out localPoint);
+            _rect.anchoredPosition = localPoint;
+        }
 
         UpdateHighlight(eventData);
 
@@ -134,7 +152,7 @@ public class DragHandler : MonoBehaviour,
         Vector2Int origin;
         float cellW, cellH;
         Vector2 bottomLeft = eventData.position - _dragOffset;
-        bool ok = GetGridOrigin(bottomLeft, eventData.pressEventCamera,
+        bool ok = GetGridOrigin(bottomLeft, _canvas.worldCamera,
                                out origin, out cellW, out cellH);
 
         if (ok)
@@ -199,7 +217,7 @@ public class DragHandler : MonoBehaviour,
 
         // ① ドラッグ座標がグリッド Rect 内かチェック
         if (!RectTransformUtility.RectangleContainsScreenPoint(
-                rtGrid, eventData.position, eventData.pressEventCamera))
+                rtGrid, eventData.position, _canvas.worldCamera))
         {
             _hasLastHighlight = false;     // ヒステリシスもリセット
             _highlighter.Clear();          // 完全に消す
@@ -209,14 +227,14 @@ public class DragHandler : MonoBehaviour,
         // 以下これまでの処理…
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            rtGrid, eventData.position, eventData.pressEventCamera, out localPoint);
+            rtGrid, eventData.position, _canvas.worldCamera, out localPoint);
         localPoint += new Vector2(rtGrid.rect.width * rtGrid.pivot.x,
                                   rtGrid.rect.height * rtGrid.pivot.y);
 
         float cellW, cellH;
         Vector2Int origin;
         Vector2 bottomLeft = eventData.position - _dragOffset;
-        bool ok = GetGridOrigin(bottomLeft, eventData.pressEventCamera,
+        bool ok = GetGridOrigin(bottomLeft, _canvas.worldCamera,
                                 out origin, out cellW, out cellH);
 
         // ヒステリシス(縦方向)…
