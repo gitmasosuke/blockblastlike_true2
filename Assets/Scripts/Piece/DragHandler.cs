@@ -104,23 +104,24 @@ public class DragHandler : MonoBehaviour,
             GameManager.Instance.gridManager == null)
             return;
 
-        // ハイライト位置にピースを合わせる
+        // まずハイライトを更新して原点セルを取得
+        UpdateHighlight(eventData);
+
         Vector2 bottomLeftScreen = eventData.position - _dragOffset;
-        //g20qi4-codex/ドラッグ挙動を修正
-        Vector2Int origin;
+        Vector2Int dummyOrigin;
         float cellW, cellH;
         bool inGrid = GetGridOrigin(bottomLeftScreen, _canvas.worldCamera,
-                                    out origin, out cellW, out cellH);
+                                    out dummyOrigin, out cellW, out cellH);
 
-        if (inGrid || cellW > 0f)
+        if (_hasLastHighlight && (inGrid || cellW > 0f))
         {
             var grid = GameManager.Instance.gridManager;
             var rtGrid = grid.GetComponent<RectTransform>();
             float halfW = rtGrid.rect.width * 0.5f;
             float halfH = rtGrid.rect.height * 0.5f;
             _rect.anchoredPosition = new Vector2(
-                origin.x * cellW - halfW,
-                origin.y * cellH - halfH);
+                _lastHighlightOrigin.x * cellW - halfW,
+                _lastHighlightOrigin.y * cellH - halfH);
         }
         else
         {
@@ -133,8 +134,6 @@ public class DragHandler : MonoBehaviour,
             _rect.anchoredPosition = localPoint;
         }
 
-
-        UpdateHighlight(eventData);
 
 
     }
