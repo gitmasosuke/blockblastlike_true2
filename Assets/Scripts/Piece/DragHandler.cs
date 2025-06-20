@@ -80,19 +80,18 @@ public class DragHandler : MonoBehaviour,
         transform.localScale = _originalScale * scale;
 
         // 左下までのオフセットを計算
-        int maxX = int.MinValue;
-        int maxY = int.MinValue;
-        foreach (var c in _pieceUI.data.cells)
-        {
-            if (c.x > maxX) maxX = c.x;
-            if (c.y > maxY) maxY = c.y;
-        }
-        Vector2 pivotScreen = RectTransformUtility.WorldToScreenPoint(
-            eventData.pressEventCamera, _rect.position);
-        Vector2 bottomLeft = pivotScreen + new Vector2(
-            -_rect.pivot.x * (maxX + 1) * gridSize,
-            -_rect.pivot.y * (maxY + 1) * gridSize);
-        _dragOffset = eventData.position - bottomLeft;
+        //   PieceUI の RectTransform はピース実サイズより大きいため
+        //   実際の Rect サイズを考慮してスクリーン座標を求める
+
+        // Rect の左下ワールド座標を取得
+        Vector3 worldBottomLeft = _rect.TransformPoint(new Vector3(
+            -_rect.pivot.x * _rect.rect.width,
+            -_rect.pivot.y * _rect.rect.height,
+            0f));
+        Vector2 bottomLeftScreen = RectTransformUtility.WorldToScreenPoint(
+            eventData.pressEventCamera, worldBottomLeft);
+
+        _dragOffset = eventData.position - bottomLeftScreen;
 
         // 最初のハイライト表示
         UpdateHighlight(eventData);
