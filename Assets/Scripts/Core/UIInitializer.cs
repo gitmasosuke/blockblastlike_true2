@@ -8,7 +8,10 @@ public class UIInitializer : MonoBehaviour
     void Awake()
     {
         // ■ Canvas の Scale を 1,1,1 に戻す
-        var canvas = Object.FindAnyObjectByType<Canvas>();
+        // Prefer the explicitly named root canvas, fall back to the first one found
+        var canvasGO = GameObject.Find("Canvas");
+        var canvas = canvasGO != null ? canvasGO.GetComponent<Canvas>() : null;
+        canvas ??= Object.FindAnyObjectByType<Canvas>();
         if (canvas != null)
         {
             var rtCanvas = canvas.GetComponent<RectTransform>();
