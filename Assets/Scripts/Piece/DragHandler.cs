@@ -61,6 +61,10 @@ public class DragHandler : MonoBehaviour,
         transform.SetParent(_canvas.transform, true);
         transform.SetAsLastSibling();
 
+        // レイアウトグループから外れると Anchor が (0,1) に残るので中央に戻す
+        _rect.anchorMin = _rect.anchorMax = new Vector2(0.5f, 0.5f);
+        _rect.anchoredPosition = Vector2.zero;
+
         // グリッド上の「1セル辺長」を取得
         float gridSize = GameManager.Instance.gridManager.CellSize;
 
