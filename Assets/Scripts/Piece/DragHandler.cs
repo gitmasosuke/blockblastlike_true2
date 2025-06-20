@@ -111,10 +111,10 @@ public class DragHandler : MonoBehaviour,
         Vector2 bottomLeftScreen = eventData.position - _dragOffset;
         Vector2Int dummyOrigin;
         float cellW, cellH;
-        bool inGrid = GetGridOrigin(bottomLeftScreen, _canvas.worldCamera,
-                                    out dummyOrigin, out cellW, out cellH);
+        bool canPlace = GetGridOrigin(bottomLeftScreen, _canvas.worldCamera,
+                                      out dummyOrigin, out cellW, out cellH);
 
-        if (_hasLastHighlight && (inGrid || cellW > 0f))
+        if (_hasLastHighlight && (canPlace || cellW > 0f))
         {
             var grid = GameManager.Instance.gridManager;
             var rtGrid = grid.GetComponent<RectTransform>();
@@ -159,7 +159,7 @@ public class DragHandler : MonoBehaviour,
 
         if (ok)
         {
-            // グリッド内タッチ＋
+            // 配置可能な位置なら
             // 全セル配置可能か（範囲外セルも含めて）チェック
             if (GameManager.Instance.gridManager
                     .CanPlace(_pieceUI.data.cells, origin))
