@@ -61,6 +61,14 @@ public class DragHandler : MonoBehaviour,
         transform.SetParent(_canvas.transform, true);
         transform.SetAsLastSibling();
 
+        // 現在位置での左下スクリーン座標を先に計算しておく
+        Vector3 worldBottomLeft = _rect.TransformPoint(new Vector3(
+            -_rect.pivot.x * _rect.rect.width,
+            -_rect.pivot.y * _rect.rect.height,
+            0f));
+        Vector2 bottomLeftScreen = RectTransformUtility.WorldToScreenPoint(
+            _canvas.worldCamera, worldBottomLeft);
+
         // レイアウトグループから外れると Anchor が (0,1) に残るので中央に戻す
         _rect.anchorMin = _rect.anchorMax = new Vector2(0.5f, 0.5f);
         _rect.anchoredPosition = Vector2.zero;
@@ -82,14 +90,6 @@ public class DragHandler : MonoBehaviour,
         // 左下までのオフセットを計算
         //   PieceUI の RectTransform はピース実サイズより大きいため
         //   実際の Rect サイズを考慮してスクリーン座標を求める
-
-        // Rect の左下ワールド座標を取得（拡大前）
-        Vector3 worldBottomLeft = _rect.TransformPoint(new Vector3(
-            -_rect.pivot.x * _rect.rect.width,
-            -_rect.pivot.y * _rect.rect.height,
-            0f));
-        Vector2 bottomLeftScreen = RectTransformUtility.WorldToScreenPoint(
-            _canvas.worldCamera, worldBottomLeft);
 
         // ポインタと左下の距離（拡大前）
         Vector2 pointerOffset = eventData.position - bottomLeftScreen;
