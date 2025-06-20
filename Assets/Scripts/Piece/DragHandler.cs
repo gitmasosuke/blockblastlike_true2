@@ -75,15 +75,11 @@ public class DragHandler : MonoBehaviour,
         // 手札表示時に PieceUI が使っている1セル辺長
         float handSize = _pieceUI.CellSizeInHand;
 
-        // ドラッグ中はこの倍率で全体を拡大
-        float scale = gridSize / handSize;
-        transform.localScale = _originalScale * scale;
-
         // 左下までのオフセットを計算
         //   PieceUI の RectTransform はピース実サイズより大きいため
         //   実際の Rect サイズを考慮してスクリーン座標を求める
 
-        // Rect の左下ワールド座標を取得
+        // Rect の左下ワールド座標を取得（拡大前）
         Vector3 worldBottomLeft = _rect.TransformPoint(new Vector3(
             -_rect.pivot.x * _rect.rect.width,
             -_rect.pivot.y * _rect.rect.height,
@@ -91,8 +87,15 @@ public class DragHandler : MonoBehaviour,
         Vector2 bottomLeftScreen = RectTransformUtility.WorldToScreenPoint(
             _canvas.worldCamera, worldBottomLeft);
 
-        // Scale the offset so the grabbed cell stays under the pointer
-        _dragOffset = (eventData.position - bottomLeftScreen) * scale;
+        // ポインタと左下の距離（拡大前）
+        Vector2 pointerOffset = eventData.position - bottomLeftScreen;
+
+        // ドラッグ中はこの倍率で全体を拡大
+        float scale = gridSize / handSize;
+        transform.localScale = _originalScale * scale;
+
+        // 拡大後も同じセルがポインタ下に来るようオフセットを更新
+        _dragOffset = pointerOffset * scale;
 
         // 最初のハイライト表示
         UpdateHighlight(eventData);
