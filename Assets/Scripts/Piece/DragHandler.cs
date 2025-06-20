@@ -106,7 +106,7 @@ public class DragHandler : MonoBehaviour,
 
         // ハイライト位置にピースを合わせる
         Vector2 bottomLeftScreen = eventData.position - _dragOffset;
-        g20qi4-codex/ドラッグ挙動を修正
+        //g20qi4-codex/ドラッグ挙動を修正
         Vector2Int origin;
         float cellW, cellH;
         bool inGrid = GetGridOrigin(bottomLeftScreen, _canvas.worldCamera,
