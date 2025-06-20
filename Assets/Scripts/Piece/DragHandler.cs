@@ -284,16 +284,10 @@ public class DragHandler : MonoBehaviour,
         float rawX = localPoint.x / cellW;
         float rawY = localPoint.y / cellH;
 
-        const float switchThreshold = 0.5f; // ← ここを調整すると判定を手前／奥にシフトできます
 
-        int fx = Mathf.FloorToInt(rawX);
-        float fractX = rawX - fx;
-        int ox = (fractX >= switchThreshold) ? fx + 1 : fx;
+        int ox = Mathf.FloorToInt(rawX);
+        int oy = Mathf.FloorToInt(rawY);
         ox = Mathf.Clamp(ox, 0, GridManager.Width - 1);
-
-        int fy = Mathf.FloorToInt(rawY);
-        float fractY = rawY - fy;
-        int oy = (fractY >= switchThreshold) ? fy + 1 : fy;
         oy = Mathf.Clamp(oy, 0, GridManager.Height - 1);
 
         origin = new Vector2Int(ox + GridManager.OffsetX,
