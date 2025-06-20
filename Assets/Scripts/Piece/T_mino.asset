@@ -18,3 +18,4 @@ MonoBehaviour:
   - {x: 1, y: 1}
   - {x: 2, y: 0}
   blockSprite: {fileID: -190364731537695696, guid: 73daee98546bede409bad512b17beda5, type: 3}
+  thumbnailSprite: {fileID: -190364731537695696, guid: 73daee98546bede409bad512b17beda5, type: 3}
